@@ -39,6 +39,13 @@ export default function Home() {
     setCurrentFact("")
     return true
   }
+
+  function getRandomEmoji ()  {
+    const allowedEmoji = '😊🙃🤪🤓🤯😴💩👻👽🤖👾👐🖖✌️🤟🤘🤙👋🐭🦕🦖🐉';
+    return (
+      allowedEmoji[Math.floor(Math.random() * allowedEmoji.length)] 
+      );
+  };
   
   return (
     <>
@@ -71,8 +78,8 @@ export default function Home() {
           <h3>Add a Fact</h3>
           <Row>
             <Col xs={12} md={8}><input type="text" value={currentFact} onChange={handleChange} className={styles.form}/></Col>
-            <Col xs={6} md={2}><button className={styles.button} onClick={() => {addFact("melon", currentFact, "💩")}}>Add to Melons</button></Col>
-            <Col xs={6} md={2}><button className={styles.button} onClick={() => {addFact("dino", currentFact, "💩")}}>Add to Dinos</button></Col>
+            <Col xs={6} md={2}><button className={styles.button} onClick={() => {addFact("melon", currentFact, getRandomEmoji())}}>Add to Melons</button></Col>
+            <Col xs={6} md={2}><button className={styles.button} onClick={() => {addFact("dino", currentFact, getRandomEmoji())}}>Add to Dinos</button></Col>
           </Row>
         </Container>
       </article>
