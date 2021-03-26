@@ -1,65 +1,81 @@
 import Head from 'next/head'
+import { useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
+import Infocard from '../components/Infocard'
+import Winner from '../components/Winner'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+
+  const [dinoFacts, setDinoFacts] = useState([
+    ["🕹", "There is an amazing Chrome dino game"],
+    ["👴", "They are very old, almost as old as Ryan Swift"],
+    ["7️⃣", "The old dinosaur ever found was at 7"]
+  ])
+
+  const [melonFacts, setMelonFacts] = useState([
+    ["☠️", "Jack is allergic to them"],
+    ["🏆", "They have a Local Hack Day subguild thing named after them"],
+    ["🎉", "They are yeetful"]
+  ])
+
+  const [currentFact, setCurrentFact] = useState("")
+
+  function handleChange(event) {
+    setCurrentFact(event.target.value)
+  }
+
+  function addFact(type, fact, emoji) {
+    if(type == "melon"){
+      const tempFacts = [...melonFacts]
+      tempFacts.push([emoji, fact])
+      setMelonFacts(tempFacts)  
+    } else {
+      const tempFacts = [...dinoFacts]
+      tempFacts.push([emoji, fact])
+      setDinoFacts(tempFacts)  
+    }
+
+    setCurrentFact("")
+    return true
+  }
+  
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <>
+      <header className={styles.header}>
+        <h1>Melons vs Dinos</h1>
+      </header>
+      <article>
+        <Container className={styles.content}>
+          <Winner winner={dinoFacts.length > melonFacts.length ? "dino" : dinoFacts.length == melonFacts.length ? "draw" : "melon"} />
+          <Row>
+            <Col xs={12} md={6}>
+              <h2 className={styles.melonHeader}>Melons</h2>
+              {
+                melonFacts.map((fact) =>
+                  <Infocard text={fact[1]} emoji={fact[0]} type="melon" />
+                )
+              }
+            </Col>
+            <Col xs={12} md={6}>
+              <h2 className={styles.dinoHeader}>Dinos</h2>
+              {
+                dinoFacts.map((fact) =>
+                  <Infocard text={fact[1]} emoji={fact[0]} type="dino" />
+                )
+              }
+            </Col>
+          </Row>
+        </Container>
+        <Container className={styles.content}>
+          <h3>Add a Fact</h3>
+          <Row>
+            <Col xs={12} md={8}><input type="text" value={currentFact} onChange={handleChange} className={styles.form}/></Col>
+            <Col xs={6} md={2}><button className={styles.button} onClick={() => {addFact("melon", currentFact, "💩")}}>Add to Melons</button></Col>
+            <Col xs={6} md={2}><button className={styles.button} onClick={() => {addFact("dino", currentFact, "💩")}}>Add to Dinos</button></Col>
+          </Row>
+        </Container>
+      </article>
+    </>
   )
 }
