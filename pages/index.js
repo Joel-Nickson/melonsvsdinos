@@ -41,7 +41,7 @@ export default function Home() {
   }
 
   function getRandomEmoji ()  {
-    const allowedEmoji = '😊🙃🤪🤓👐🖖✌️🤟🤘🤙👋😎🙂😉😏😥🙄😴😌😛🤐😯😲☹😱🥺☠👻👽👾🤖💩🐱‍👤🤯�';
+    const allowedEmoji = '😊🙃✌️😎🙂😉😏😥🙄😴😌😛🤐😯😲☹😱🥺☠👻👽👾🤖💩🐱‍👤🤯';
     return (
       allowedEmoji[Math.floor(Math.random() * allowedEmoji.length)] 
       );
