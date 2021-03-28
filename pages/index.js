@@ -14,9 +14,9 @@ export default function Home() {
   ])
 
   const [melonFacts, setMelonFacts] = useState([
-    ["☠️", "Jack is allergic to them"],
     ["🏆", "They have a Local Hack Day subguild thing named after them"],
-    ["🎉", "They are yeetful"]
+    ["🎉", "They are yeetful"],
+    ["🌊","They have more than 70% waterr in them"]
   ])
 
   const [currentFact, setCurrentFact] = useState("")
