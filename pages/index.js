@@ -39,11 +39,13 @@ export default function Home() {
     setCurrentFact("")
     return true
   }
-
   function getRandomEmoji ()  {
-    const allowedEmoji = '😊🙃✌️😎🙂😉😏😥🙄😴😌😛🤐😯😲☹😱🥺☠👻👽👾🤖💩🐱‍👤🤯';
+    const allowedEmoji = ['☠','☹','⓿_⓿','◑_◐','T_T','ಠ_ಠ','⊙o⊙','⊙ˍ⊙','⊙.☉','⚆_⚆','●__●','✌️','😉','😉','😌','🙂','😎','🥳','😖','🥺','😱','😨','😢','🤩','😵'];
+    console.log(Math.floor(Math.random() * allowedEmoji.length)%allowedEmoji.length)
+    console.log(allowedEmoji)
+    
     return (
-      allowedEmoji[Math.floor(Math.random() * allowedEmoji.length)] 
+      allowedEmoji[Math.floor(Math.random() * allowedEmoji.length)%allowedEmoji.length]
       );
   };
   
